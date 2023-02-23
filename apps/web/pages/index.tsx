@@ -1,10 +1,14 @@
-import { Button } from "ui";
+import { Card } from "ui";
 
 export default function Web() {
   return (
     <div>
-      <h1>Web</h1>
-      <Button />
+      <h1>Cryptocurrecny Realtime price</h1>
+      <Card
+        title="Bitcoin"
+        subtitle="$25000"
+        content={<>xxxx</>}
+        />
     </div>
   );
 }
