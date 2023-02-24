@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { TickerService } from './ticker.service';
-import { HttpModule } from '@nestjs/axios';
-import { ConfigModule } from '@nestjs/config';
+import { HttpModule, HttpService } from '@nestjs/axios';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
 describe('TickerService', () => {
   let service: TickerService;
@@ -9,7 +9,16 @@ describe('TickerService', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [ConfigModule.forRoot(), HttpModule],
-      providers: [TickerService],
+      providers: [
+        {
+          provide: TickerService,
+          useFactory: (httpService: HttpService, config: ConfigService) => {
+            const ticker = config.get('TICKER_SOURCE');
+            return new TickerService(httpService, ticker);
+          },
+          inject: [HttpService, ConfigService],
+        },
+      ],
     }).compile();
 
     service = module.get<TickerService>(TickerService);
@@ -19,8 +28,12 @@ describe('TickerService', () => {
     expect(service).toBeDefined();
   });
 
+  it('should have a ticker name', () => {
+    expect(service.getTickerName()).toBeDefined();
+  });
+
   it('should call an API', async () => {
-    const response = await service.callApi();
+    const response = await service.getPrice();
     expect(response.status).toEqual(200);
   });
 });

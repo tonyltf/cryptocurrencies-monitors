@@ -1,19 +1,16 @@
+import { AxiosResponse } from 'axios';
+
 export interface ITickerReponse {
-  ticker: {
-    base: string;
-    targer: string;
-    price: string;
-    volume: string;
-    change: string;
-  };
-  timestamp: number;
-  success: boolean;
-  error: string;
+  base: string;
+  target: string;
+  price: string;
+  volume: string;
+  change: string;
 }
 
-export default interface ITicker {
+export interface ITicker {
+  name: string;
   apiPath: string;
-  model: object;
-
-  getPrice(): TickerReponse;
+  getName: () => string;
+  callApi: () => Promise<AxiosResponse<ITickerReponse>>;
 }
