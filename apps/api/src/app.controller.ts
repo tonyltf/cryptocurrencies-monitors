@@ -6,7 +6,7 @@ import { TickerService } from './ticker/ticker.service';
 export class AppController {
   constructor(
     private readonly appService: AppService,
-    private readonly tickerProvider: TickerService,
+    private readonly tickerService: TickerService,
   ) {}
 
   @Get()
@@ -16,6 +16,11 @@ export class AppController {
 
   @Get('/ticker')
   getTickerName(): string {
-    return this.tickerProvider.getTickerName();
+    return this.tickerService.getTickerName();
+  }
+
+  @Get('/list')
+  getCurrencyList(): { [key: string]: string } {
+    return this.tickerService.getCurrencyList();
   }
 }

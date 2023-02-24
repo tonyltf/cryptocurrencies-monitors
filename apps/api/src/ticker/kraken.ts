@@ -24,14 +24,20 @@ export class Kraken implements ITicker {
     this.apiPath = 'https://api.kraken.com/0/public/Ticker?pair={pair}';
   }
   getName() {
-
     return this.name;
-  } 
+  }
 
   getCurrencyList() {
     return {
-      Bitcoin: ''
-    }
+      Bitcoin: 'BTCUSD',
+      Ether: 'ETHUSD',
+      Litecoin: 'LTCUSD',
+      Monero: 'XMRUSD',
+      Ripple: 'XRPUSD',
+      Dogecoin: 'DOGEUSD',
+      Dash: 'DASHUSD',
+      Lisk: 'LSKUSD',
+    };
   }
 
   callApi: () => Promise<AxiosResponse<IKrakenReponse, any>>;

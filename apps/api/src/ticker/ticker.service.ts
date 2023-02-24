@@ -25,6 +25,10 @@ export class TickerService {
     return this.ticker?.getName();
   }
 
+  getCurrencyList() {
+    return this.ticker?.getCurrencyList()
+  }
+
   async getPrice(pair: string): Promise<AxiosResponse<ITickerReponse>> {
     try {
       console.log(this.ticker?.apiPath);
