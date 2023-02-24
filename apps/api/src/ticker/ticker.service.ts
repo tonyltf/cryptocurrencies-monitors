@@ -25,11 +25,12 @@ export class TickerService {
     return this.ticker?.getName();
   }
 
-  async getPrice(): Promise<AxiosResponse<ITickerReponse>> {
+  async getPrice(pair: string): Promise<AxiosResponse<ITickerReponse>> {
     try {
       console.log(this.ticker?.apiPath);
+      const apiPath = this.ticker?.apiPath?.replace('{pair}', pair) || '';
       const response = await this.httpService.axiosRef.get<ITickerReponse>(
-        this.ticker?.apiPath,
+        apiPath,
       );
       return response;
     } catch (e) {

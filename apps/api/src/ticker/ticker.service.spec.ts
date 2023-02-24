@@ -33,7 +33,7 @@ describe('TickerService', () => {
   });
 
   it('should call an API', async () => {
-    const response = await service.getPrice();
+    const response = await service.getPrice('BTCUSD');
     expect(response.status).toEqual(200);
   });
 });
