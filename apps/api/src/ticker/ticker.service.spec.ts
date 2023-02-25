@@ -1,7 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { TickerService } from './ticker.service';
-import { HttpModule, HttpService } from '@nestjs/axios';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { HttpModule } from '@nestjs/axios';
+import { ConfigModule } from '@nestjs/config';
+import { tickerProvider } from '../app.module';
 
 describe('TickerService', () => {
   let service: TickerService;
@@ -9,16 +10,7 @@ describe('TickerService', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [ConfigModule.forRoot(), HttpModule],
-      providers: [
-        {
-          provide: TickerService,
-          useFactory: (httpService: HttpService, config: ConfigService) => {
-            const ticker = config.get('TICKER_SOURCE');
-            return new TickerService(httpService, ticker);
-          },
-          inject: [HttpService, ConfigService],
-        },
-      ],
+      providers: [tickerProvider],
     }).compile();
 
     service = module.get<TickerService>(TickerService);

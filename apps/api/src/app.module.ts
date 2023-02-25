@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { CacheModule, Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 
 import { AppController } from './app.controller';
@@ -6,7 +6,7 @@ import { AppService } from './app.service';
 import { HttpModule, HttpService } from '@nestjs/axios';
 import { TickerService } from './ticker/ticker.service';
 
-const tickerProvider = {
+export const tickerProvider = {
   provide: TickerService,
   useFactory: (httpService: HttpService, config: ConfigService) => {
     const ticker = config.get('TICKER_SOURCE');
@@ -16,7 +16,7 @@ const tickerProvider = {
 };
 
 @Module({
-  imports: [ConfigModule.forRoot(), HttpModule],
+  imports: [ConfigModule.forRoot(), HttpModule, CacheModule.register()],
   controllers: [AppController],
   providers: [AppService, tickerProvider],
 })

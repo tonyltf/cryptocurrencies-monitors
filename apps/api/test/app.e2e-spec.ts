@@ -1,12 +1,11 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-import { HttpModule, HttpService } from '@nestjs/axios';
+import { ConfigModule } from '@nestjs/config';
+import { HttpModule } from '@nestjs/axios';
 import * as request from 'supertest';
-import { AppModule } from './../src/app.module';
+import { AppModule, tickerProvider } from './../src/app.module';
 import { Response } from 'supertest';
 import { TICKER_PROVIDER } from './../src/ticker/ticker.constant';
-import { TickerService } from './../src/ticker/ticker.service';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
@@ -15,16 +14,7 @@ describe('AppController (e2e)', () => {
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [AppModule, ConfigModule.forRoot(), HttpModule],
-      providers: [
-        {
-          provide: TickerService,
-          useFactory: (httpService: HttpService, config: ConfigService) => {
-            const ticker = config.get('TICKER_SOURCE');
-            return new TickerService(httpService, ticker);
-          },
-          inject: [HttpService, ConfigService],
-        },
-      ],
+      providers: [tickerProvider],
     }).compile();
 
     app = moduleFixture.createNestApplication();

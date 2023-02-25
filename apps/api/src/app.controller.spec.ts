@@ -1,9 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { TickerService } from './ticker/ticker.service';
-import { HttpModule, HttpService } from '@nestjs/axios';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { HttpModule } from '@nestjs/axios';
+import { ConfigModule } from '@nestjs/config';
+import { tickerProvider } from './app.module';
 
 describe('AppController', () => {
   let appController: AppController;
@@ -13,17 +13,7 @@ describe('AppController', () => {
     const app: TestingModule = await Test.createTestingModule({
       imports: [ConfigModule.forRoot(), HttpModule],
       controllers: [AppController],
-      providers: [
-        AppService,
-        {
-          provide: TickerService,
-          useFactory: (httpService: HttpService, config: ConfigService) => {
-            const ticker = config.get('TICKER_SOURCE');
-            return new TickerService(httpService, ticker);
-          },
-          inject: [HttpService, ConfigService],
-        },
-      ],
+      providers: [AppService, tickerProvider],
     }).compile();
 
     appController = app.get<AppController>(AppController);
