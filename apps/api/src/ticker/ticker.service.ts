@@ -6,13 +6,21 @@ import { ITicker } from './ticker.inteface';
 import { TICKER_PROVIDER } from './ticker.constant';
 import { Cryptonator } from './cryptonator';
 import { Kraken } from './kraken';
+import { InjectRedis, Redis } from '@nestjs-modules/ioredis';
+import { CacheService } from 'src/lib/cache.service';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class TickerService {
   private ticker: ITicker;
   private apiPath: string;
 
-  constructor(private readonly httpService: HttpService, ticker: string) {
+  constructor(
+    ticker: string,
+    private readonly configService: ConfigService,
+    private readonly httpService: HttpService,
+    private readonly cacheService: CacheService,
+  ) {
     if (ticker === TICKER_PROVIDER.CRYPTONATOR) {
       this.ticker = new Cryptonator();
     }
@@ -36,12 +44,23 @@ export class TickerService {
     }
     try {
       // TODO: Try to read from cache
-      const apiPath = this.ticker?.apiPath?.replace('{pair}', pair) || '';
-      const response = (
-        await this.httpService.axiosRef.get<ITickerReponse>(apiPath)
-      ).data;
-      // TODO: Cache price
-      return this.ticker.transform(response);
+      const cachedResponse = await this.cacheService.get<Buffer>(pair);
+      console.log({ cachedResponse });
+      if (!cachedResponse) {
+        const apiPath = this.ticker?.apiPath?.replace('{pair}', pair) || '';
+        const response = (
+          await this.httpService.axiosRef.get<ITickerReponse>(apiPath)
+        ).data;
+        // TODO: Cache price
+        await this.cacheService.set(
+          pair,
+          Buffer.from(JSON.stringify(response)),
+          this.configService.get('TICKER_SOURCE_TTL'),
+        );
+        return this.ticker.transform(response);
+      } else {
+        return this.ticker.transform(JSON.parse(cachedResponse.toString()));
+      }
     } catch (e) {
       const error = <AxiosError>e;
       if (error.status === 403) {
