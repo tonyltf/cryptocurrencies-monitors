@@ -2,20 +2,31 @@ services:
   web:
     build:
       context: .
-      dockerfile: ./Dockerfile_web
+      dockerfile: ./apps/web/Dockerfile
     ports:
       - "3000:3000"
-    volumes:
-      - .:/code
+    environment:
+      - SERVER_API_PATH=http://api:8000
+      - EXTERNAL_API_PATH=http://localhost:8000
+    networks:
+      - app_network
   api:
     build:
       context: .
-      dockerfile: ./Dockerfile_api
+      dockerfile: ./apps/api/Dockerfile
     ports:
       - "8000:8000"
     environment:
       - TICKER_SOURCE=Kraken
       - TICKER_SOURCE_TTL=30
       - REDIS_URL=redis:6379
+    networks:
+      - app_network
   redis:
     image: redis
+    networks:
+      - app_network
+
+networks:
+  app_network:
+    external: false

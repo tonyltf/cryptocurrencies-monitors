@@ -2,8 +2,7 @@
 export async function getPrice (pair: string): Promise<TickerResponse> {
   // Instead of the file system,
   // fetch post data from an external API endpoint
-  console.log(`${process.env.API_PATH}/price/${pair}`);
-  const res = await fetch(`${process.env.API_PATH}/price/${pair}`);
+  const res = await fetch(`${process.env.EXTERNAL_API_PATH}/price/${pair}`);
   return res.json();
 }
 

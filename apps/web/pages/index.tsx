@@ -38,7 +38,7 @@ export async function getServerSideProps () {
   // Instead of the file system,
   // fetch post data from an external API endpoint
   // eslint-disable-next-line turbo/no-undeclared-env-vars
-  const res = await fetch(`${process.env.API_PATH}/list`);
+  const res = await fetch(`${process.env.SERVER_API_PATH}/list`);
   const currencyList = await res.json();
   return { props: { currencyList }};
 }
