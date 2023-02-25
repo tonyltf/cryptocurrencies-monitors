@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { AppService } from './app.service';
 import { TickerService } from './ticker/ticker.service';
 
@@ -22,5 +22,10 @@ export class AppController {
   @Get('/list')
   getCurrencyList(): { [key: string]: string } {
     return this.tickerService.getCurrencyList();
+  }
+
+  @Get('/price/:pair')
+  async getPrice(@Param('pair') pair: string): Promise<any> {
+    return this.tickerService.getPrice(pair);
   }
 }

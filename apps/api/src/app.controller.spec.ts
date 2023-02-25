@@ -7,6 +7,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 
 describe('AppController', () => {
   let appController: AppController;
+  let bitcoinPair: string;
 
   beforeEach(async () => {
     const app: TestingModule = await Test.createTestingModule({
@@ -38,8 +39,13 @@ describe('AppController', () => {
 
     it('should return the list of available currency', () => {
       const list = appController.getCurrencyList();
+      bitcoinPair = list?.Bitcoin;
       expect(list).toBeDefined();
-      expect(list['Bitcoin']).toBeDefined();
+      expect(bitcoinPair).toBeDefined();
+    });
+
+    it('should return price info of Bitcoin', () => {
+      expect(appController.getPrice(bitcoinPair)).toBeDefined();
     });
   });
 });
