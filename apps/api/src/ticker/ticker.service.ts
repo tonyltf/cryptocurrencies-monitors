@@ -1,10 +1,10 @@
 import { HttpService } from '@nestjs/axios';
-import { AxiosError, AxiosResponse } from 'axios';
+import { AxiosError } from 'axios';
 import { Injectable } from '@nestjs/common';
 import { ITickerReponse, ITickerResult } from './ticker.inteface';
-import { Cryptonator } from './cryptonator';
 import { ITicker } from './ticker.inteface';
 import { TICKER_PROVIDER } from './ticker.constant';
+import { Cryptonator } from './cryptonator';
 import { Kraken } from './kraken';
 
 @Injectable()
@@ -35,10 +35,12 @@ export class TickerService {
       return { price: undefined, change: undefined, volume: undefined };
     }
     try {
+      // TODO: Try to read from cache
       const apiPath = this.ticker?.apiPath?.replace('{pair}', pair) || '';
       const response = (
         await this.httpService.axiosRef.get<ITickerReponse>(apiPath)
       ).data;
+      // TODO: Cache price
       return this.ticker.transform(response);
     } catch (e) {
       const error = <AxiosError>e;

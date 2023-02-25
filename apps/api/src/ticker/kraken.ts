@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios';
-import { ITicker, ITickerReponse, ITickerResult } from './ticker.inteface';
+import { ITicker, ITickerResult } from './ticker.inteface';
 
 export interface IKrakenReponse {
   result: {
