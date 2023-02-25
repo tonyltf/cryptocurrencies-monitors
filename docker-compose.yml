@@ -1,0 +1,21 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: ./Dockerfile_web
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/code
+  api:
+    build:
+      context: .
+      dockerfile: ./Dockerfile_api
+    ports:
+      - "8000:8000"
+    environment:
+      - TICKER_SOURCE=Kraken
+      - TICKER_SOURCE_TTL=30
+      - REDIS_URL=redis:6379
+  redis:
+    image: redis
