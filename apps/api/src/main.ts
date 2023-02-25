@@ -1,5 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import helmet from 'helmet';
+
 import { AppModule } from './app.module';
 
 async function bootstrap() {
@@ -12,6 +14,12 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
+
+  app.use(helmet());
+  app.enableCors({
+    origin: '*',
+    methods: ['GET', 'POST', 'OPTIONS'],
+  });
   await app.listen(8000);
 }
 bootstrap();
