@@ -35,5 +35,11 @@ describe('AppController', () => {
     it('should return the ticker name', () => {
       expect(appController.getTickerName()).toBeDefined();
     });
+
+    it('should return the list of available currency', () => {
+      const list = appController.getCurrencyList();
+      expect(list).toBeDefined();
+      expect(list['Bitcoin']).toBeDefined();
+    });
   });
 });
