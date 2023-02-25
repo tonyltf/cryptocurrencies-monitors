@@ -43,15 +43,12 @@ export class TickerService {
       return { price: undefined, change: undefined, volume: undefined };
     }
     try {
-      // TODO: Try to read from cache
       const cachedResponse = await this.cacheService.get<Buffer>(pair);
-      console.log({ cachedResponse });
       if (!cachedResponse) {
         const apiPath = this.ticker?.apiPath?.replace('{pair}', pair) || '';
         const response = (
           await this.httpService.axiosRef.get<ITickerReponse>(apiPath)
         ).data;
-        // TODO: Cache price
         await this.cacheService.set(
           pair,
           Buffer.from(JSON.stringify(response)),
