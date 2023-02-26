@@ -17,4 +17,4 @@ export interface CurrencyInfo {
   pair: string;
 }
 
-export type CurrencyCard = TickerResponse & CurrencyInfo;
+export type TPriceCard = TickerResponse & CurrencyInfo;
