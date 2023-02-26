@@ -1,22 +1,26 @@
 import { useEffect, useState, Suspense } from "react";
 import styled from 'styled-components'
-import { Card } from "ui";
+import { styles } from "ui";
 import PriceCard from "../lib/components/PriceCard";
+import "ui/global.css"
 
 const CardContiner = styled.div`
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 10px;
 `;
 
 export default function Web(props: any) {
   const { currencyList } = props;
   return (
     <div>
-      <h1>Cryptocurrecny Realtime price</h1>
-      <CardContiner>
+      <h1>Cryptocurrency Realtime price</h1>
+      <CardContiner className={styles.parent}>
         {Object.keys(currencyList).map(key => 
           <Suspense key={key} fallback={<p>Loading price...</p>}>
-            <PriceCard name={key} pair={currencyList[key]} />
+            <PriceCard name={key} pair={currencyList[key]} className={styles.child} />
           </Suspense>
         )}
       </CardContiner>

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Card } from "ui/Card";
 import { TPriceCard, getPrice } from "../ticker";
 
-export default function PriceCard({ name, pair }: { name: string; pair: string; }) {
+export default function PriceCard({ className, name, pair }: { className: string; name: string; pair: string; }) {
   const [priceInfo, setPriceInfo] = useState<TPriceCard>({ name, pair });
   useEffect(() => {
     const fetchCurrencyPrice = async () => {
@@ -18,12 +18,14 @@ export default function PriceCard({ name, pair }: { name: string; pair: string; 
 
   return (
     <Card
+      height={100}
+      width={250}
       key={pair}
       title={name || ''}
       subtitle={`$${priceInfo?.price || ''}`}
       items={[
-        { label: 'Volume: ', value: priceInfo?.volume?.toString() || '-' },
-        { label: 'Change: ', value: priceInfo?.change?.toString() || '-' },
+        { label: 'Volume: ', value: priceInfo?.volume?.toString() || '-', color: 'grey' },
+        { label: 'Change: ', value: priceInfo?.change?.toString() || '-', color: (priceInfo?.change || 0) < 0 ? 'red' : (priceInfo?.change || 0) > 0 ? 'green' : 'grey' },
       ]}
     />
   )
