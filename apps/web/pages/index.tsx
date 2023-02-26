@@ -17,10 +17,10 @@ export default function Web(props: any) {
   return (
     <div>
       <h1>Cryptocurrency Realtime price</h1>
-      <CardContiner className={styles.parent}>
+      <CardContiner className={(styles as any).parent}>
         {Object.keys(currencyList).map(key => 
           <Suspense key={key} fallback={<p>Loading price...</p>}>
-            <PriceCard name={key} pair={currencyList[key]} className={styles.child} />
+            <PriceCard name={key} pair={currencyList[key]} className={(styles as any).child} />
           </Suspense>
         )}
       </CardContiner>
