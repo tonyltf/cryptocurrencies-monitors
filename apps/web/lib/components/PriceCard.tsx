@@ -18,7 +18,6 @@ export default function PriceCard({ className, name, pair }: { className: string
 
   return (
     <Card
-      height={100}
       width={250}
       key={pair}
       title={name || ''}

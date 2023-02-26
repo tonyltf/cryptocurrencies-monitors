@@ -32,7 +32,7 @@ const ItemValue= styled.div<{ color: string; }>`
   color: ${({ color }) => color};
 `;
 
-export const Card = ({ height, width, title, subtitle, items }: { height: number; width: number; title: string; subtitle: string; items: { label: string; value: string; color?: string; }[] }) => {
+export const Card = ({ height, width, title, subtitle, items }: { height?: number; width?: number; title: string; subtitle: string; items: { label: string; value: string; color?: string; }[] }) => {
   return <CardWrapper className={styles.child} height={height} width={width}>
     <CardTitle>{title}</CardTitle>
     <CardSubtitle>{subtitle}</CardSubtitle>
