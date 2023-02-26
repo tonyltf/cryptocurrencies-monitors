@@ -5,11 +5,6 @@ import PriceCard from "../lib/components/PriceCard";
 import "ui/global.css"
 
 const CardContiner = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  gap: 10px;
 `;
 
 export default function Web(props: any) {

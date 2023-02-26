@@ -6,7 +6,6 @@ import { ITicker } from './ticker.inteface';
 import { TICKER_PROVIDER } from './ticker.constant';
 import { Cryptonator } from './cryptonator';
 import { Kraken } from './kraken';
-import { InjectRedis, Redis } from '@nestjs-modules/ioredis';
 import { CacheService } from 'src/lib/cache.service';
 import { ConfigService } from '@nestjs/config';
 

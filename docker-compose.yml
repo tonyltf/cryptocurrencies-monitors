@@ -5,9 +5,6 @@ services:
       dockerfile: ./apps/web/Dockerfile
     ports:
       - "3000:3000"
-    environment:
-      - SERVER_API_PATH=http://api:8000
-      - EXTERNAL_API_PATH=http://api:8000
     networks:
       - app_network
   api:

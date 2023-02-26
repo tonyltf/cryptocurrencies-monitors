@@ -12,6 +12,5 @@ module.exports = (phase, { defaultConfig }) => {
       EXTERNAL_API_PATH: process.env.EXTERNAL_API_PATH,
     },
   };
-  console.log(process.env.SERVER_API_PATH, { nextConfig });
   return nextConfig;
 }
