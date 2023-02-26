@@ -4,7 +4,7 @@ module.exports = {
   transpilePackages: ["ui"],
   output: 'standalone',
   env: { 
-    SERVER_API_PATH: 'http://api:8000',
+    SERVER_API_PATH: 'http://localhost:8000',
     EXTERNAL_API_PATH: 'http://localhost:8000',
   },
 }
