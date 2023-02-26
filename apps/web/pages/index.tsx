@@ -1,36 +1,25 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
+import styled from 'styled-components'
 import { Card } from "ui";
-import { CurrencyCard, getPrice } from "../lib/ticker";
+import PriceCard from "../lib/components/PriceCard";
+
+const CardContiner = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`;
 
 export default function Web(props: any) {
   const { currencyList } = props;
-  const [currencyCards, setCurrencyCards] = useState<CurrencyCard[]>([]);
-  useEffect(() => {
-    const fetchByCurrencyList = async () => {
-      const cards = await Promise.all(Object.keys(currencyList).map(async (key: string) => {
-        const priceInfo = await getPrice(currencyList[key]);
-        return {
-          name: key,
-          pair: currencyList[key],
-          ...priceInfo,
-        }
-      }));
-      setCurrencyCards(cards);
-    };
-    fetchByCurrencyList();
-  }, [currencyList]);
-
   return (
     <div>
       <h1>Cryptocurrecny Realtime price</h1>
-      {currencyCards.map(({ name, pair, price, volume, change }: { name: string; pair: string; price?: number; volume?: number; change?: number; }) => {
-        return <Card
-          key={pair}
-          title={name}
-          subtitle={`$${price}`}
-          content={<>Volume: {volume || '-'}<br/>Change: {change || '-'}</>}
-          />
-      })}
+      <CardContiner>
+        {Object.keys(currencyList).map(key => 
+          <Suspense key={key} fallback={<p>Loading price...</p>}>
+            <PriceCard name={key} pair={currencyList[key]} />
+          </Suspense>
+        )}
+      </CardContiner>
     </div>
   );
 }
