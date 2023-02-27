@@ -12,12 +12,16 @@ export default function PriceCard({
   const [priceInfo, setPriceInfo] = useState<TPriceCard>({ name, pair });
   useEffect(() => {
     const fetchCurrencyPrice = async () => {
-      const priceInfo = await getPrice(pair);
-      setPriceInfo({
-        name,
-        pair,
-        ...priceInfo,
-      });
+      try {
+        const priceInfo = await getPrice(pair);
+        setPriceInfo({
+          name,
+          pair,
+          ...priceInfo,
+        });
+      } catch(e) {
+        console.error(e);
+      }
     };
     fetchCurrencyPrice();
   }, [name, pair]);
