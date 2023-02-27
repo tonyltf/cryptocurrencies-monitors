@@ -133,6 +133,7 @@ importers:
       eslint: 7.32.0
       eslint-config-custom: workspace:*
       next: ^13.1.1
+      nock: ^13.3.0
       react: 18.2.0
       react-dom: 18.2.0
       styled-components: ^5.3.6
@@ -154,6 +155,7 @@ importers:
       cypress: 12.7.0
       eslint: 7.32.0
       eslint-config-custom: link:../../packages/eslint-config-custom
+      nock: 13.3.0
       tsconfig: link:../../packages/tsconfig
       typescript: 4.9.5
 
@@ -5717,6 +5719,18 @@ packages:
       - babel-plugin-macros
     dev: false
 
+  /nock/13.3.0:
+    resolution: {integrity: sha512-HHqYQ6mBeiMc+N038w8LkMpDCRquCHWeNmN3v6645P3NhN2+qXOBqvPqo7Rt1VyCMzKhJ733wZqw5B7cQVFNPg==}
+    engines: {node: '>= 10.13'}
+    dependencies:
+      debug: 4.3.4
+      json-stringify-safe: 5.0.1
+      lodash: 4.17.21
+      propagate: 2.0.1
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
+
   /node-abort-controller/3.1.1:
     resolution: {integrity: sha512-AGK2yQKIjRuqnc6VkX2Xj5d+QW8xZ87pa1UK6yA6ouUyuxfHuMP6umE5QK7UmTeOAymo+Zx1Fxiuw9rVx8taHQ==}
     dev: true
@@ -6071,6 +6085,11 @@ packages:
       object-assign: 4.1.1
       react-is: 16.13.1
     dev: false
+
+  /propagate/2.0.1:
+    resolution: {integrity: sha512-vGrhOavPSTz4QVNuBNdcNXePNdNMaO1xj9yBeH1ScQPjk/rhg9sSlCXPhMkFuaNNW/syTvYqsnbIJxMBfRbbag==}
+    engines: {node: '>= 8'}
+    dev: true
 
   /proxy-addr/2.0.7:
     resolution: {integrity: sha512-llQsMLSUDUPT44jdrU/O37qlnifitDP+ZwrmmZcoSKyLKvtZxpyV0n2/bD/N4tBAAZ/gJEdZU7KMraoK1+XYAg==}

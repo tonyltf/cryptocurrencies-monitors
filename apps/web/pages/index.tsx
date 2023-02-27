@@ -7,12 +7,12 @@ import "ui/global.css";
 const CardContiner = styled.div``;
 
 export default function Web(props: any) {
-  const { currencyList } = props;
+  const { currencyList = {} } = props;
   return (
     <div>
       <h1>Cryptocurrency Realtime price</h1>
       {currencyList && (
-        <CardContiner className={(styles as any).parent}>
+        <CardContiner className={(styles as any).parent} data-cy="currencyList">
           {Object.keys(currencyList).map((key) => (
             <Suspense key={key} fallback={<p>Loading price...</p>}>
               <PriceCard name={key} pair={currencyList[key]} />
