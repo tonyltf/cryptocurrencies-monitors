@@ -44,7 +44,12 @@ export const Card = ({
   items: { label: string; value: string; color?: string }[];
 }) => {
   return (
-    <CardWrapper className={styles.child} height={height} width={width} data-cy="card">
+    <CardWrapper
+      className={styles.child}
+      height={height}
+      width={width}
+      data-cy="card"
+    >
       <CardTitle data-cy="cardTitle">{title}</CardTitle>
       <CardSubtitle data-cy="cardSubtitle">{subtitle}</CardSubtitle>
       <ItemContainer className={styles.parent}>
@@ -52,7 +57,12 @@ export const Card = ({
           return (
             <ItemWrapper key={label} className={styles.child}>
               <ItemLabel>{label} :</ItemLabel>
-              <ItemValue data-cy={`cardItem${label}Value`} color={color || "black"}>{value}</ItemValue>
+              <ItemValue
+                data-cy={`cardItem${label}Value`}
+                color={color || "black"}
+              >
+                {value}
+              </ItemValue>
             </ItemWrapper>
           );
         })}

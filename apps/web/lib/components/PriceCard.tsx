@@ -19,7 +19,7 @@ export default function PriceCard({
           pair,
           ...priceInfo,
         });
-      } catch(e) {
+      } catch (e) {
         console.error(e);
       }
     };
