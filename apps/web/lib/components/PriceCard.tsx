@@ -3,11 +3,9 @@ import { Card } from "ui/Card";
 import { TPriceCard, getPrice } from "../ticker";
 
 export default function PriceCard({
-  className,
   name,
   pair,
 }: {
-  className: string;
   name: string;
   pair: string;
 }) {

@@ -1,4 +1,4 @@
-import { useEffect, useState, Suspense } from "react";
+import { Suspense } from "react";
 import styled from "styled-components";
 import { styles } from "ui";
 import PriceCard from "../lib/components/PriceCard";
@@ -17,7 +17,6 @@ export default function Web(props: any) {
             <PriceCard
               name={key}
               pair={currencyList[key]}
-              className={(styles as any).child}
             />
           </Suspense>
         ))}
