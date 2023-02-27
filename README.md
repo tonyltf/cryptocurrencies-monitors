@@ -42,7 +42,7 @@ docker-compose up -d
 
 ## Timebox
 
-The implementation started at 23 Feb and completed on 26 Feb midnight. Average hours worked per day is 2 - 3. Some blockers faced;
+The implementation started at 23 Feb and completed on 27 Feb. Average hours worked per day is 2 - 3. Some blockers faced;
 
 - Cryptonator API is not a reliable source in my case, need to research another API source
 - This is the first time I used [Turbo](https://turbo.build/) and [Next.js](https://nextjs.org/). Blocked by creating an optimized build with Docker
