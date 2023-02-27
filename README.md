@@ -1,13 +1,10 @@
 # Cryptocurrencies monitors
 
-## Apps and Packages
+## Apps
 
-- `api`: a [Nest](https://github.com/nestjs/nest) app
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `ui`: a stub React component library shared by both `web` and `docs` applications
-- `eslint-config-custom`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `tsconfig`: `tsconfig.json`s used throughout the monorepo
+- `web`: Frontend -  [Next.js](https://nextjs.org/) app
+- `api`: Backend - [Nest](https://github.com/nestjs/nest) app
+- `redis`: Caching service used by backend
 
 ## Build
 
@@ -25,7 +22,7 @@ To run all apps and packages, run the following command:
 docker-compose up -d
 ```
 
-## Design
+## Design related
 
 - Issue:
   - Cryptonator API is being blocked by Cloudflare browser checking so the application cannot directly fetch from that source
@@ -38,7 +35,7 @@ docker-compose up -d
 - Scalability:
   - Currently it is using Docker Compose to run apps, ideally using k8s can minimize changes to apps/containers but provide the scalability, i.e. multiple backend services can be run
 - Data storage:
-  - Currently the application does not use any database service as it is depending on pass throught data
+  - Currently the application does not use any database service as it is depending on pass through data, if past data will be needed that we should add a database
 
 ## Timebox
 
