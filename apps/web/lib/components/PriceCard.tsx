@@ -28,18 +28,19 @@ export default function PriceCard({
 
   return (
     <Card
+      data-cy="priceCard"
       width={250}
       key={pair}
       title={name || ""}
       subtitle={`$${priceInfo?.price || ""}`}
       items={[
         {
-          label: "Volume: ",
+          label: "Volume",
           value: priceInfo?.volume?.toString() || "-",
           color: "grey",
         },
         {
-          label: "Change: ",
+          label: "Change",
           value: priceInfo?.change?.toString() || "-",
           color:
             (priceInfo?.change || 0) < 0

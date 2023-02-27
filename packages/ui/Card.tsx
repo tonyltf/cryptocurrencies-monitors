@@ -44,15 +44,15 @@ export const Card = ({
   items: { label: string; value: string; color?: string }[];
 }) => {
   return (
-    <CardWrapper className={styles.child} height={height} width={width}>
-      <CardTitle>{title}</CardTitle>
-      <CardSubtitle>{subtitle}</CardSubtitle>
+    <CardWrapper className={styles.child} height={height} width={width} data-cy="card">
+      <CardTitle data-cy="cardTitle">{title}</CardTitle>
+      <CardSubtitle data-cy="cardSubtitle">{subtitle}</CardSubtitle>
       <ItemContainer className={styles.parent}>
         {items?.map(({ label, value, color }) => {
           return (
             <ItemWrapper key={label} className={styles.child}>
-              <ItemLabel>{label}</ItemLabel>
-              <ItemValue color={color || "black"}>{value}</ItemValue>
+              <ItemLabel>{label} :</ItemLabel>
+              <ItemValue data-cy={`cardItem${label}Value`} color={color || "black"}>{value}</ItemValue>
             </ItemWrapper>
           );
         })}

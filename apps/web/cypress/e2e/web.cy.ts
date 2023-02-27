@@ -22,7 +22,6 @@ describe('Web', () => {
       }
     });
     cy.visit('http://localhost:3000/');
-    console.log(cy.get('[data-cy=currencyList]'));
     cy.get('[data-cy=currencyList]').children().should('have.length.at.least', 1);
   })
 
