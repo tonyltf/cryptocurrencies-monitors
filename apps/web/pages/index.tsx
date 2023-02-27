@@ -11,16 +11,15 @@ export default function Web(props: any) {
   return (
     <div>
       <h1>Cryptocurrency Realtime price</h1>
-      <CardContiner className={(styles as any).parent}>
-        {Object.keys(currencyList).map((key) => (
-          <Suspense key={key} fallback={<p>Loading price...</p>}>
-            <PriceCard
-              name={key}
-              pair={currencyList[key]}
-            />
-          </Suspense>
-        ))}
-      </CardContiner>
+      {currencyList && (
+        <CardContiner className={(styles as any).parent}>
+          {Object.keys(currencyList).map((key) => (
+            <Suspense key={key} fallback={<p>Loading price...</p>}>
+              <PriceCard name={key} pair={currencyList[key]} />
+            </Suspense>
+          ))}
+        </CardContiner>
+      )}
     </div>
   );
 }
